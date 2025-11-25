@@ -33,15 +33,14 @@ function List() {
     );
   }
 
-  return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Danh sách tours</h1>
-        <Link to="/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-         Thêm mới
-        </Link>
-      </div>
+    return (
+      <div className="max-w-6xl mx-auto p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-semibold">Danh sách tours</h1>
+          <Link to="/add" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            Thêm mới
+          </Link>
+        </div>
 
         <div className="overflow-x-auto">
           <table className="w-full border border-gray-300 rounded-lg text-center">
@@ -86,9 +85,8 @@ function List() {
             </tbody>
           </table>
         </div>
-      
-    </div>
-  );
-}
+      </div>
+    );
+};
 
 export default List;
