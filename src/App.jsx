@@ -64,14 +64,14 @@ function App() {
           </div>
 
           {/* Right menu desktop */}
-          {/* <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
             <a href="#" className="hover:text-gray-200">
               Đăng nhập
             </a>
             <a href="#" className="hover:text-gray-200">
               Đăng ký
             </a>
-          </div> */}
+          </div>
         </div>
         
       </nav>
