@@ -29,25 +29,20 @@ function Add() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.destination ||
-      !formData.price ||
-      !formData.duration
-    ) {
+    if (!formData.name || !formData.destination || !formData.price || !formData.duration) {
       toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
 
     try {
       setLoading(true);
-      const payload = {
+      const data = {
         ...formData,
         price: parseInt(formData.price) || 0,
         available: parseInt(formData.available) || 0,
       };
 
-      const response = await axios.post("http://localhost:3001/tours", payload);
+      const response = await axios.post("http://localhost:3001/tours", data);
 
       if (response.status >= 200 && response.status < 300) {
         toast.success("Thêm tour thành công");
@@ -56,7 +51,7 @@ function Add() {
         throw new Error("Lỗi khi thêm tour");
       }
     } catch (error) {
-      toast.error("Lỗi: " + (error.response?.data?.message || error.message));
+      toast.error("Lỗi: " + error.message);
       console.error(error);
     } finally {
       setLoading(false);
@@ -68,7 +63,6 @@ function Add() {
       <h1 className="text-2xl font-semibold mb-6 text-center">Thêm mới tour</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
-        {/* Tên tour */}
         <div>
           <label htmlFor="name" className="block font-medium mb-1">
             Tên tour <span className="text-red-500">*</span>
@@ -84,7 +78,6 @@ function Add() {
           />
         </div>
 
-        {/* Điểm đến */}
         <div>
           <label htmlFor="destination" className="block font-medium mb-1">
             Điểm đến <span className="text-red-500">*</span>
@@ -100,7 +93,6 @@ function Add() {
             />
         </div>
 
-        {/* Thời gian */}
         <div>
           <label htmlFor="duration" className="block font-medium mb-1">
             Thời gian <span className="text-red-500">*</span>
@@ -116,7 +108,6 @@ function Add() {
             />
         </div>
 
-        {/* Giá */}
         <div>
           <label htmlFor="price" className="block font-medium mb-1">
             Giá (VND) <span className="text-red-500">*</span>
@@ -132,8 +123,7 @@ function Add() {
             />
         </div>
 
-        {/* Ảnh */}
-        <div>
+       <div>
           <label htmlFor="image" className="block font-medium mb-1">
             URL Ảnh
           </label>
@@ -148,7 +138,6 @@ function Add() {
           />
         </div>
 
-        {/* Mô tả */}
         <div>
           <label htmlFor="description" className="block font-medium mb-1">
             Mô tả
@@ -164,7 +153,6 @@ function Add() {
           />
         </div>
 
-        {/* Số chỗ còn */}
         <div>
           <label htmlFor="available" className="block font-medium mb-1">
             Số chỗ còn
@@ -180,7 +168,6 @@ function Add() {
           />
         </div>
 
-        {/* Loại tour */}
         <div>
           <label htmlFor="category" className="block font-medium mb-1">
             Loại tour
@@ -198,7 +185,6 @@ function Add() {
           </select>
         </div>
 
-        {/* Kích hoạt */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -213,7 +199,6 @@ function Add() {
           </label>
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-3">
           <button
             type="submit"

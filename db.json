@@ -24,18 +24,6 @@
       "name": "Trần Văn E",
       "destination": "Hội An",
       "duration": "4 ngày 5 đêm",
-      "price": 20000,
-      "image": "123.jpg",
-      "description": "",
-      "available": 0,
-      "category": "",
-      "active": true,
-      "id": 3
-    },
-    {
-      "name": "Trần Văn E",
-      "destination": "Hội An",
-      "duration": "4 ngày 5 đêm",
       "price": 1400,
       "image": "https://picsum.photos/400/300?random=3",
       "description": "",
@@ -43,6 +31,18 @@
       "category": "tour-quoc-te",
       "active": true,
       "id": 5
+    },
+    {
+      "name": "Áo update",
+      "destination": "Hội An",
+      "duration": "4 ngày 5 đêm",
+      "price": 1400,
+      "image": "https://picsum.photos/400/300?random=4",
+      "description": "123",
+      "available": 8,
+      "category": "",
+      "active": true,
+      "id": 6
     }
   ]
 }
