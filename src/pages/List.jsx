@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 function List() {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("http://localhost:3001/tours");
+        setTours(response.data);
+      } catch (error) {
+        toast.error("Lỗi khi lấy danh sách tours");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchTours();
   }, []);
-
-  const fetchTours = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("http://localhost:3001/tours");
-      const data = await response.json();
-      setTours(data);
-    } catch (error) {
-      toast.error("Lỗi khi lấy danh sách tours");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   
   if (loading) {
@@ -32,6 +31,23 @@ function List() {
       </div>
     );
   }
+
+  // Xóa tour (DELETE)
+    const deleteTour = async (id) => {
+        if (!confirm("Bạn chắc chắn muốn xóa Tour này chứ?")) return;
+        setLoading(true);
+        try {
+            await axios.delete(`http://localhost:3001/tours/${id}`);
+            setTours(tours.filter((t) => t.id !== id));
+            toast.success("Xóa tour thành công");
+        } catch (error) {
+            toast.error("Lỗi khi xoá tours");
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     return (
       <div className="max-w-6xl mx-auto p-6">
@@ -75,7 +91,8 @@ function List() {
                       <Link to={`/edit/${tour.id}`} className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-sm">
                          Sửa
                       </Link>
-                      <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm">
+                      <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
+                      onClick={() => deleteTour(tour.id)}>
                          Xóa
                       </button>
                     </div>
