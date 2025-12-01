@@ -3,12 +3,12 @@
     {
       "id": 1,
       "name": "Hà Nội - Sapa 3N2D",
-      "destination": "Sapa",
-      "duration": "3 ngày 2 đêm",
-      "price": 2500000,
+      "destination": "HN-Sapa",
+      "duration": "4 ngày 3 đêm",
+      "price": 1000000,
       "image": "https://picsum.photos/400/300?random=1",
       "description": "Khám phá Sapa với những ruộng bậc thang tuyệt đẹp",
-      "available": 15
+      "available": 10
     },
     {
       "id": 2,

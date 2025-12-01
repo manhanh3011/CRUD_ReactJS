@@ -58,9 +58,6 @@ function App() {
             <Link to="/add" className="hover:text-gray-200">
               Thêm mới
             </Link>
-            <Link to="/edit" className="hover:text-gray-200">
-              Sửa
-            </Link>
           </div>
 
           {/* Right menu desktop */}
@@ -84,7 +81,7 @@ function App() {
         <Routes>
             <Route path="/list" element={<List />} />
             <Route path="/add" element={<Add />} />
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/edit/:id" element={<Edit />} />
             <Route path="/layout" element={<Layout />} />
         </Routes>
       <Toaster />

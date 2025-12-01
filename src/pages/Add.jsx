@@ -5,7 +5,6 @@ import axios from "axios";
 
 function Add() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     destination: "",
@@ -35,26 +34,18 @@ function Add() {
     }
 
     try {
-      setLoading(true);
       const data = {
         ...formData,
         price: parseInt(formData.price) || 0,
         available: parseInt(formData.available) || 0,
       };
 
-      const response = await axios.post("http://localhost:3001/tours", data);
-
-      if (response.status >= 200 && response.status < 300) {
-        toast.success("Thêm tour thành công");
-        navigate("/list");
-      } else {
-        throw new Error("Lỗi khi thêm tour");
-      }
+      await axios.post("http://localhost:3001/tours", data);
+      toast.success("Thêm tour thành công");
+      navigate("/list");
     } catch (error) {
       toast.error("Lỗi: " + error.message);
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -202,10 +193,9 @@ function Add() {
         <div className="flex gap-3">
           <button
             type="submit"
-            disabled={loading}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
           >
-            {loading ? "Đang lưu..." : "Thêm mới"}
+          Thêm mới
           </button>
         </div>
       </form>
