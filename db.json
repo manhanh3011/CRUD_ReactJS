@@ -44,5 +44,12 @@
       "active": true,
       "id": 6
     }
+  ],
+  "users": [
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$QH7XStoU5pZJ8Xqq3jLuueV/rPrppuuPITiGu.mt/y8W5fB6uSv1C",
+      "id": 1
+    }
   ]
 }

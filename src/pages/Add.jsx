@@ -40,7 +40,7 @@ function Add() {
         available: parseInt(formData.available) || 0,
       };
 
-      await axios.post("http://localhost:3001/tours", data);
+      await axios.post("http://localhost:3000/tours", data);
       toast.success("Thêm tour thành công");
       navigate("/list");
     } catch (error) {

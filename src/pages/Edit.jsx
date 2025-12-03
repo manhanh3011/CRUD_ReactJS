@@ -21,7 +21,7 @@ function Edit() {
   useEffect(() => {
     const getTour = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/tours/${id}`);
+        const response = await axios.get(`http://localhost:3000/tours/${id}`);
         setFormData(response.data);
       } catch (error) {
         toast.error("Lỗi không lấy được id");
@@ -53,7 +53,7 @@ function Edit() {
         available: parseInt(formData.available) || 0,
       };
 
-      await axios.put(`http://localhost:3001/tours/${id}`, data);
+      await axios.put(`http://localhost:3000/tours/${id}`, data);
       toast.success("Cập nhật tour thành công");
       navigate("/list");
     } catch (error) {
