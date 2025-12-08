@@ -41,7 +41,9 @@ function Login(){
                 password
             });
             localStorage.setItem('token', data.accessToken);
+            localStorage.setItem('user', JSON.stringify(data.user));
             toast.success("Đăng nhập thành công");
+            navigate("/list");
         } catch (error) {
             toast.error(error.message);
         }

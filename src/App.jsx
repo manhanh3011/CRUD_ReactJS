@@ -1,6 +1,6 @@
 import { Toaster } from "react-hot-toast";
-import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import List from "./pages/List";
 import Add from "./pages/Add";
 import Edit from "./pages/Edit";
@@ -11,6 +11,25 @@ import Login from "./pages/Login";
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Load user info from localStorage
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+
+    if (token && userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/login');
+  };
 
   return (
     <>
@@ -68,12 +87,28 @@ function App() {
 
           {/* Right menu desktop */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/register" className="hover:text-gray-200">
-              Đăng ký
-            </Link>
-            <Link to="/login" className="hover:text-gray-200">
-              Đăng nhập
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-white">
+                  Xin chào, <span className="font-semibold">{user.email}</span>
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link to="/register" className="hover:text-gray-200">
+                  Đăng ký
+                </Link>
+                <Link to="/login" className="hover:text-gray-200">
+                  Đăng nhập
+                </Link>
+              </>
+            )}
           </div>
         </div>
         
