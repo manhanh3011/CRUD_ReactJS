@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import List from "./pages/List";
 import Add from "./pages/Add";
 import Edit from "./pages/Edit";
+import Detail from "./pages/Detail";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
@@ -18,7 +19,7 @@ function App() {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Brand */}
           <a href="#" className="text-xl font-semibold">
-            <strong>WEB501 App</strong>
+            <strong>Tour App</strong>
           </a>
 
           {/* Mobile toggle */}
@@ -51,7 +52,7 @@ function App() {
 
           {/* Menu desktop */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/layout" className="hover:text-gray-200">
+            <Link to="/" className="hover:text-gray-200">
               Trang chủ
             </Link>
             <Link to="/list" className="hover:text-gray-200">
@@ -59,6 +60,9 @@ function App() {
             </Link>
             <Link to="/add" className="hover:text-gray-200">
               Thêm mới
+            </Link>
+            <Link to="/detail/1" className="hover:text-gray-200">
+              Chi tiết
             </Link>
           </div>
 
@@ -81,6 +85,7 @@ function App() {
             <Route path="/list" element={<List />} />
             <Route path="/add" element={<Add />} />
             <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
         </Routes>

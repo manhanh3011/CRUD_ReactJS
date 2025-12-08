@@ -8,8 +8,32 @@ function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const validateData = () => {
+        let message = '';
+
+        if (!email || !password) {
+            message = 'Cần nhập đầy đủ thông tin';
+        }
+
+        if (email && !/\S+@\S+\.\S+/.test(email)) {
+            message = 'Email không hợp lệ';
+        }
+
+        if (password && password.length < 6) {
+            message = 'Mật khẩu phải ít nhất 6 ký tự';
+        }
+
+        return message;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const message = validateData();
+        if (message) {
+            toast.error(message);
+            return;
+        }
 
         try {
             const {data} = await axios.post("http://localhost:3000/login", {

@@ -6,59 +6,78 @@ import axios from "axios";
 function Edit() {
   const {id} = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    destination: "",
-    duration: "",
-    price: "",
-    image: "",
-    description: "",
-    available: "",
-    category: "",
-    active: true,
-  });
+  const [name, setName] = useState("");
+  const [destination, setDestination] = useState("");
+  const [duration, setDuration] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [available, setAvailable] = useState("");
+  const [category, setCategory] = useState("");
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
     const getTour = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/tours/${id}`);
-        setFormData(response.data);
+        const tour = response.data;
+        setName(tour.name || "");
+        setDestination(tour.destination || "");
+        setDuration(tour.duration || "");
+        setPrice(tour.price || "");
+        setImage(tour.image || "");
+        setDescription(tour.description || "");
+        setAvailable(tour.available || "");
+        setCategory(tour.category || "");
+        setActive(tour.active !== undefined ? tour.active : true);
       } catch (error) {
-        toast.error("Lỗi không lấy được id");
+        toast.error("Lỗi không lấy được tour");
       }
     };
-    getTour(id);
+    getTour();
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+  const validateData = () => {
+    let message = '';
+
+    if (!name || !destination || !price || !duration) {
+      message = 'Vui lòng nhập đầy đủ thông tin';
+    }
+
+    if (price && isNaN(price)) {
+      message = 'Giá phải là số';
+    }
+
+    return message;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.destination || !formData.price || !formData.duration) {
-      toast.error("Vui lòng điền đầy đủ thông tin");
+    const message = validateData();
+    if (message) {
+      toast.error(message);
       return;
     }
 
     try {
       const data = {
-        ...formData,
-        price: parseInt(formData.price) || 0,
-        available: parseInt(formData.available) || 0,
+        name,
+        destination,
+        duration,
+        price: parseInt(price) || 0,
+        image,
+        description,
+        available: parseInt(available) || 0,
+        category,
+        active,
       };
 
       await axios.put(`http://localhost:3000/tours/${id}`, data);
       toast.success("Cập nhật tour thành công");
       navigate("/list");
     } catch (error) {
-      toast.error("Lỗi: " + error.message);
-      console.error(error);
+      toast.error( error.message);
     }
   };
 
@@ -74,9 +93,8 @@ function Edit() {
           <input
             type="text"
             id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="VD: Đà Lạt 4N3D"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -89,9 +107,8 @@ function Edit() {
           <input
             type="text"
             id="destination"
-            name="destination"
-            value={formData.destination}
-            onChange={handleChange}
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
             placeholder="VD: Đà Lạt"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -104,9 +121,8 @@ function Edit() {
           <input
             type="text"
             id="duration"
-            name="duration"
-            value={formData.duration}
-            onChange={handleChange}
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
             placeholder="VD: 4 ngày 3 đêm"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -119,9 +135,8 @@ function Edit() {
           <input
             type="number"
             id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             placeholder="VD: 3200000"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -134,9 +149,8 @@ function Edit() {
           <input
             type="text"
             id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
             placeholder="VD: https://picsum.photos/400/300?random=3"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -148,9 +162,8 @@ function Edit() {
           </label>
           <textarea
             id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Nhập mô tả tour"
             rows="3"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,9 +177,8 @@ function Edit() {
           <input
             type="number"
             id="available"
-            name="available"
-            value={formData.available}
-            onChange={handleChange}
+            value={available}
+            onChange={(e) => setAvailable(e.target.value)}
             placeholder="VD: 10"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -178,9 +190,8 @@ function Edit() {
           </label>
           <select
             id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="tour-noi-dia">Tour nội địa</option>
@@ -193,9 +204,8 @@ function Edit() {
           <input
             type="checkbox"
             id="active"
-            name="active"
-            checked={formData.active}
-            onChange={handleChange}
+            checked={active}
+            onChange={(e) => setActive(e.target.checked)}
             className="h-4 w-4 text-blue-600 rounded border-gray-300 cursor-pointer"
           />
           <label htmlFor="active" className="font-medium cursor-pointer">
