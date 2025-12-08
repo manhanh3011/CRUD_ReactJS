@@ -16,7 +16,7 @@ function List() {
   const filterTours = () => {
     let filtered = tours;
 
-    // Lọc theo từ khóa tìm kiếm
+    // tìm kiếm theo tour
     if (searchTerm) {
       filtered = filtered.filter(tour =>
         tour.name.toLowerCase().includes(searchTerm.toLowerCase())

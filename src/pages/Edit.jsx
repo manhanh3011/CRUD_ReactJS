@@ -44,8 +44,8 @@ function Edit() {
       message = 'Vui lòng nhập đầy đủ thông tin';
     }
 
-    if (price && isNaN(price)) {
-      message = 'Giá phải là số';
+    if (price && isNaN(price) && price > 0 ) {
+      message = 'Giá phải là số và lớn hơn 0';
     }
 
     return message;
