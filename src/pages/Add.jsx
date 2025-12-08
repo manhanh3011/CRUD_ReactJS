@@ -12,7 +12,7 @@ function Add() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [available, setAvailable] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("tour-noi-dia");
   const [active, setActive] = useState(true);
 
   const validateData = () => {
@@ -172,6 +172,7 @@ function Add() {
             onChange={(e) => setCategory(e.target.value)}
             className="w-full border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
+            <option value="">Chọn loại tour</option>
             <option value="tour-noi-dia">Tour nội địa</option>
             <option value="tour-quoc-te">Tour quốc tế</option>
             <option value="tour-theo-yeu-cau">Tour theo yêu cầu</option>

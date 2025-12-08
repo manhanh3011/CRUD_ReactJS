@@ -45,6 +45,30 @@
       "category": "",
       "active": true,
       "id": 6
+    },
+    {
+      "name": "Hà Nội - Sapa",
+      "destination": "Sapa",
+      "duration": "3 ngày 2 đêm",
+      "price": 999998,
+      "image": "",
+      "description": "",
+      "available": 15,
+      "category": "",
+      "active": true,
+      "id": 7
+    },
+    {
+      "name": "HN-HCM",
+      "destination": "HCM",
+      "duration": "2 ngày 5 đêm",
+      "price": 1999998,
+      "image": "",
+      "description": "",
+      "available": 15,
+      "category": "tour-noi-dia",
+      "active": true,
+      "id": 8
     }
   ],
   "users": [

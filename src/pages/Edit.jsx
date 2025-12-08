@@ -28,7 +28,7 @@ function Edit() {
         setImage(tour.image || "");
         setDescription(tour.description || "");
         setAvailable(tour.available || "");
-        setCategory(tour.category || "");
+        setCategory(tour.category || "tour-noi-dia");
         setActive(tour.active !== undefined ? tour.active : true);
       } catch (error) {
         toast.error("Lỗi không lấy được tour");
